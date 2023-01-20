@@ -1,6 +1,7 @@
 
 import Chart from 'chart.js/auto';
-
+import { loadChartData } from '../redux/chartActions';
+import store from '../redux/store';
 // Create a new canvas element
 const ctx = document.createElement("canvas") as HTMLCanvasElement;
 ctx.height = 200;
@@ -10,14 +11,14 @@ const tableOne = document.querySelector("#table1") as HTMLTableElement;
 
 // Get the parent element of the table
 const parentTable = tableOne.parentNode as HTMLElement;
-interface Datasets {
+export interface Datasets {
     label: string;
     data: number[];
     backgroundColor: string;
     borderColor: string;
     borderWidth: number;
 }
-interface ChartData {
+export interface ChartData {
     labels: string[],
     datasets: Datasets[]
 }
@@ -50,12 +51,12 @@ const datasets: Datasets[] = countries.map(el => {
         borderWidth: 1,
     };
 });
-
-
 const data: ChartData = {
-    labels: labelYears,
-    datasets,
+  labels: labelYears,
+  datasets,
 };
+store.dispatch(loadChartData(data));
+const dataChart:ChartData = store.getState().chart
 
 const options: any = {
     stacked: true,
@@ -63,7 +64,7 @@ const options: any = {
 
 new Chart(ctx, {
     type: "line",
-    data,
+    data: dataChart,
     options: options,
 });
 
