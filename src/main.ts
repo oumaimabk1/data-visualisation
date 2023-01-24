@@ -23,13 +23,13 @@ export interface ChartData {
     datasets: Datasets[]
 }
 
-const getRandomColor = (): string => {
+export const getRandomColor = (): string => {
   const r = Math.floor(Math.random() * 256);
   const g = Math.floor(Math.random() * 256);
   const b = Math.floor(Math.random() * 256);
   return `rgb(${r}, ${g}, ${b})`;
 }
-const extractValues = (cell: HTMLTableCellElement): number => {
+export const extractValues = (cell: HTMLTableCellElement): number => {
   return parseInt(cell.innerHTML.replace(",", "."));
 }
 

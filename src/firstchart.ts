@@ -1,6 +1,5 @@
 import Chart from 'chart.js/auto';
 
-
 // Create a new canvas element
 const ctx: HTMLCanvasElement = document.createElement("canvas") as HTMLCanvasElement;
 
